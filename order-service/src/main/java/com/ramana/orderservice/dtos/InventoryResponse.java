@@ -1,4 +1,4 @@
-package com.ramana.inventoryservice.dto;
+package com.ramana.orderservice.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
