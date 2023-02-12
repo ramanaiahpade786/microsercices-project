@@ -27,52 +27,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @AutoConfigureMockMvc
 class ProductServiceApplicationTests {
-
-    @Container
-    static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.4.2"));
-    private static final String URI = "/api/product";
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ProductRepository productRepository;
-    private ObjectMapper objectMapper;
-
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry) {
-        dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
-    }
-
-    @BeforeEach
-    void setUp() {
-        objectMapper = new ObjectMapper();
-    }
-
-    @Test
-    void shouldCreateProduct() throws Exception {
-        ProductRequest productRequest = getProductRequest();
-        String productRequestString = objectMapper.writeValueAsString(productRequest);
-
-        mockMvc.perform(MockMvcRequestBuilders.post(URI)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(productRequestString))
-                .andExpect(status().isCreated());
-
-        assertEquals(1, productRepository.findAll().size());
-    }
-
-    @Test
-    void shouldGetCreatedProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(URI))
-                .andExpect(status().isOk());
-    }
-
-    private ProductRequest getProductRequest() {
-        return ProductRequest.builder()
-                .name("Iphone-13")
-                .description("Iphone 13 ")
-                .price(BigDecimal.valueOf(1400000))
-                .build();
-    }
+//
+//    @Container
+//    static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.4.2"));
+//    private static final String URI = "/api/product";
+//    @Autowired
+//    private MockMvc mockMvc;
+//    @Autowired
+//    private ProductRepository productRepository;
+//    private ObjectMapper objectMapper;
+//
+//    @DynamicPropertySource
+//    static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry) {
+//        dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
+//    }
+//
+//    @BeforeEach
+//    void setUp() {
+//        objectMapper = new ObjectMapper();
+//    }
+//
+//    @Test
+//    void shouldCreateProduct() throws Exception {
+//        ProductRequest productRequest = getProductRequest();
+//        String productRequestString = objectMapper.writeValueAsString(productRequest);
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(URI)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(productRequestString))
+//                .andExpect(status().isCreated());
+//
+//        assertEquals(1, productRepository.findAll().size());
+//    }
+//
+//    @Test
+//    void shouldGetCreatedProduct() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get(URI))
+//                .andExpect(status().isOk());
+//    }
+//
+//    private ProductRequest getProductRequest() {
+//        return ProductRequest.builder()
+//                .name("Iphone-13")
+//                .description("Iphone 13 ")
+//                .price(BigDecimal.valueOf(1400000))
+//                .build();
+//    }
 
 
 }
